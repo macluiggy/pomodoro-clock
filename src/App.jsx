@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { Icon } from '@iconify/react';
+//import { Icon } from '@iconify/react';
 //<Icon icon='twemoji:tomato' />
 function App() {
   return (
