@@ -14,5 +14,5 @@ function App() {
     </div>
   );
 }
-console.log(eval('5+5'))
+//console.log(eval('5+5'))
 export default App;

@@ -4,8 +4,11 @@ export const mapStateToProps = statexxx => {
 
 export const mapDispatchToProps = dispatch => {
 	return {
-		fn: () => dispatch({
-			type: 'DO',
+		incrementBreak: () => dispatch({
+			type: 'INCREMENT_BREAK',
+		}),
+		decrementBreak: () => dispatch({
+			type: 'DECREMENT_BREAK',
 		})
 	}
 }
