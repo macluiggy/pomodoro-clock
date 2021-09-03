@@ -7,9 +7,11 @@ import store from './store.js';
 
 function App() {
   return (
-    <Provider store={store} >
-      <Main />
-    </Provider>
+    <div className='App'>
+      <Provider store={store} >
+        <Main />
+      </Provider>
+    </div>
   );
 }
 console.log(eval('5+5'))
