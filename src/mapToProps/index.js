@@ -17,6 +17,9 @@ export const mapDispatchToProps = dispatch => {
 		}),
 		togglePlay: () => dispatch({
 			type: 'TOGGLE_PLAY',
+		}),
+		startCountdown: () => dispatch({
+			type: 'START_COUNTDOWN',
 		})
 	}
 }

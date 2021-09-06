@@ -9,19 +9,19 @@ const Main = ({
 	changeBreakTime,
 	changeSessionTime,
 	resetPomodoro,
-	togglePlay
+	togglePlay,
+	startCountdown,
 }) => {
 	//const { value } = state.stateReducer;
-	const { breakTime, sessionTime, showPlay } = stateReducer;
+	const { breakTime, sessionTime, isClockRunnin } = stateReducer;
 	let interval;
 	//console.log(props)
 	let startCount = () => {
 		togglePlay()
-		interval = setInterval(() => {
-			console.log('log message')
-		}, 1000)
+		interval = setInterval(startCountdown, 1000)
 	}
 	let stopCount = () => {
+		togglePlay()
 		clearInterval(interval)
 	}
 	return (
@@ -61,11 +61,11 @@ const Main = ({
 					<div className='btns'>
 						<button
 							onClick={() => {
-								return showPlay ? stopCount() : startCount()
+								isClockRunnin ? stopCount() : startCount()
 							}}
 						>
 							<Icon
-							 icon={showPlay ? 'el:play' : 'fa-solid:pause'}
+							 icon={isClockRunnin ? 'fa-solid:pause' : 'el:play'}
 							 id="start_stop" />
 						</button>
 						<button onClick={() => resetPomodoro()} >

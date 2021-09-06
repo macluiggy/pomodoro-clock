@@ -1,7 +1,7 @@
 const initialState = {
 	breakTime: 5,
 	sessionTime: 25,
-	showPlay: true,
+	isClockRunnin: false,
 }
 const reducer = (state=initialState, action) => {
 	switch(action.type) {
@@ -30,7 +30,12 @@ const reducer = (state=initialState, action) => {
 		case 'TOGGLE_PLAY':
 			return {
 				...state,
-				showPlay: !state.showPlay,
+				isClockRunnin: !state.isClockRunnin,
+			}
+		case 'START_COUNTDOWN':
+			return {
+				...state,
+				sessionTime: state.sessionTime-1
 			}
 		default:
 			return state;
