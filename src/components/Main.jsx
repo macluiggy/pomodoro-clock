@@ -4,6 +4,82 @@ import { mapStateToProps, mapDispatchToProps } from '../mapToProps/'
 import '../sass/main.scss';
 import { Icon } from '@iconify/react';
 
+const Main = ({
+	stateReducer,
+	changeBreakTime,
+	changeSessionTime,
+	resetPomodoro,
+	togglePlay
+}) => {
+	//const { value } = state.stateReducer;
+	const { breakTime, sessionTime, showPlay } = stateReducer;
+	let interval;
+	//console.log(props)
+	let startCount = () => {
+		togglePlay()
+		interval = setInterval(() => {
+			console.log('log message')
+		}, 1000)
+	}
+	let stopCount = () => {
+		clearInterval(interval)
+	}
+	return (
+		<div className='container'>
+			<div className='pomodoro_title'></div>
+			<div className='pomodoro_container'>
+				<div className='break_container'>
+					<div id='break-label'>
+						<p>Break Length</p>
+						<BreakOrSession
+								changeTime={changeBreakTime}
+								decrementId="break-decrement"
+								incrementId="break-increment"	
+								breakOrSessionTime={breakTime}
+								breakOrSessionLength="break-length"
+						/>
+					</div>
+					<div id='session-label'>
+						<p>Session Length</p>
+						<BreakOrSession
+							changeTime={changeSessionTime}
+							decrementId="session-decrement"
+							incrementId="session-increment"
+							breakOrSessionTime={sessionTime}
+							breakOrSessionLength="session-length"
+						/>
+					</div>
+				</div>
+
+				<div className='timer_container'>
+					<div id='timer-label'>
+						Session
+					</div>
+					<div id='time-left'>
+						{`${sessionTime}:${'00'}`}
+					</div>
+					<div className='btns'>
+						<button
+							onClick={() => {
+								return showPlay ? stopCount() : startCount()
+							}}
+						>
+							<Icon
+							 icon={showPlay ? 'el:play' : 'fa-solid:pause'}
+							 id="start_stop" />
+						</button>
+						<button onClick={() => resetPomodoro()} >
+							<Icon
+							 icon='grommet-icons:power-reset'
+							 id='reset'
+							/>
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	)
+}
 
 const BreakOrSession = ({
 	decrementId,
@@ -26,7 +102,7 @@ const BreakOrSession = ({
 					{breakOrSessionTime}
 				</time>
 				<button 
-				  id="break-increment"
+				  id={incrementId}
 				  onClick={() => changeTime('up')}
 			    >
 					<Icon
@@ -36,74 +112,4 @@ const BreakOrSession = ({
 			</div>
 		)
 }
-const Main = ({
-	stateReducer,
-	incrementBreak,
-	decrementBreak,
-	changeBreakTime,
-}) => {
-	//const { value } = state.stateReducer;
-	const { breakTime, sessionTime } = stateReducer;
-	//console.log(props)
-	return (
-		<div className='container'>
-			<div className='pomodoro_title'></div>
-			<div className='pomodoro_container'>
-				<div className='break_container'>
-					<div id='break-label'>
-						<p>Break Length</p>
-						<BreakOrSession
-								decrementId="break-decrement"
-								changeTime={changeBreakTime}
-								incrementId="break-increment"
-								incrementFunction={incrementBreak}
-								breakOrSessionTime={breakTime}
-						/>
-					</div>
-					<div id='session-label'>
-						<p>Session Length</p>
-						<BreakOrSession
-							decrementId="session-decrement"
-
-						/>
-						<div>
-							<Icon
-							 icon='akar-icons:arrow-down'
-							 id="session-decrement" />
-							<time id="session-length">
-								{sessionTime}
-							</time>
-							<Icon
-							 icon='akar-icons:arrow-up'
-							 id="session-increment"
-							  />
-						</div>
-					</div>
-				</div>
-
-				<div className='timer_container'>
-					<div id='timer-label'>
-						Session
-					</div>
-					<div id='time-left'>
-						{`${25}:${'00'}`}
-					</div>
-					<div className='btns'>
-						<button>
-							<Icon
-							 icon={true ? 'el:play' : 'fa-solid:pause'}
-							 id="start_stop" />
-						</button>
-						<button>
-							<Icon
-							 icon='grommet-icons:power-reset'
-							 id='reset' />
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	)
-}
-
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

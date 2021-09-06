@@ -4,12 +4,19 @@ export const mapStateToProps = statexxx => {
 
 export const mapDispatchToProps = dispatch => {
 	return {
-		incrementBreak: () => dispatch({
-			type: 'INCREMENT_BREAK',
+		changeSessionTime: (upOrDown) => dispatch({
+			type: 'CHANGE_SESSION_TIME',
+			payload: upOrDown,
 		}),
 		changeBreakTime: (upOrDown) => dispatch({
-			type: 'DECREMENT_BREAK',
+			type: 'CHANGE_BREAK_TIME',
 			payload: upOrDown,
+		}),
+		resetPomodoro: () => dispatch({
+			type: 'RESET_POMODORO',
+		}),
+		togglePlay: () => dispatch({
+			type: 'TOGGLE_PLAY',
 		})
 	}
 }
