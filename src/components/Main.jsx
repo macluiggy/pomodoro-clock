@@ -101,8 +101,10 @@ const BreakOrSession = ({
 	incrementId,
 	incrementFunction,
 	breakOrSessionTime,
+	breakOrSessionLength,
 	isClockRunnin,
 }) => {
+	let breakOrSessionTimeFreezed = [...breakOrSessionTime.toString()].join('')
 	return (
 			<div>
 				<button
@@ -113,8 +115,10 @@ const BreakOrSession = ({
 					 icon='akar-icons:arrow-down'
 					/>
 				</button>
-				<time id="break-length">
-					{isClockRunnin ? breakOrSessionTime : [breakOrSessionTime].join('')}
+				<time id={breakOrSessionLength}>
+					{isClockRunnin
+						? [...breakOrSessionTime.toString()].join('')  +'hello'
+						: breakOrSessionTime + 'hola'}
 				</time>
 				<button 
 				  id={incrementId}
