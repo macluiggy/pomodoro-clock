@@ -18,10 +18,15 @@ const Main = ({
 	//console.log(props)
 	let startCount = () => {
 		togglePlay()
-		interval = setInterval(startCountdown, 1000)
+		interval = setInterval(() => {
+			if (!isClockRunnin) {
+				startCountdown()
+			}
+		}, 1000)
 	}
 	let stopCount = () => {
 		togglePlay()
+		console.log('log message')
 		clearInterval(interval)
 	}
 	return (
