@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { mapStateToProps, mapDispatchToProps } from '../mapToProps/'
 import '../sass/main.scss';
@@ -13,22 +13,30 @@ const Main = ({
 	startCountdown,
 }) => {
 	//const { value } = state.stateReducer;
-	const { breakTime, sessionTime, isClockRunnin } = stateReducer;
-	let interval;
+	const { breakTime, sessionTime, isClockRunnin, seconds } = stateReducer;
+	//let interval;
 	//console.log(props)
 	let startCount = () => {
 		togglePlay()
-		interval = setInterval(() => {
+		/*interval = setInterval(() => {
 			if (!isClockRunnin) {
 				startCountdown()
 			}
-		}, 1000)
+		}, 1000)*/
 	}
 	let stopCount = () => {
 		togglePlay()
 		console.log('log message')
-		clearInterval(interval)
+		/*clearInterval(interval)*/
 	}
+	useEffect(() => {
+		if (!isClockRunnin) return
+		let interval = setInterval(() => {
+			startCountdown()
+		}, 1000);
+
+		return () => clearInterval(interval)
+	}, [isClockRunnin])
 	return (
 		<div className='container'>
 			<div className='pomodoro_title'></div>
@@ -52,6 +60,7 @@ const Main = ({
 							incrementId="session-increment"
 							breakOrSessionTime={sessionTime}
 							breakOrSessionLength="session-length"
+							isClockRunnin={isClockRunnin}
 						/>
 					</div>
 				</div>
@@ -61,7 +70,7 @@ const Main = ({
 						Session
 					</div>
 					<div id='time-left'>
-						{`${sessionTime}:${'00'}`}
+						{`${sessionTime}:${seconds}`}
 					</div>
 					<div className='btns'>
 						<button
@@ -92,6 +101,7 @@ const BreakOrSession = ({
 	incrementId,
 	incrementFunction,
 	breakOrSessionTime,
+	isClockRunnin,
 }) => {
 	return (
 			<div>
@@ -104,7 +114,7 @@ const BreakOrSession = ({
 					/>
 				</button>
 				<time id="break-length">
-					{breakOrSessionTime}
+					{isClockRunnin ? breakOrSessionTime : [breakOrSessionTime].join('')}
 				</time>
 				<button 
 				  id={incrementId}
