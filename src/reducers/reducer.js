@@ -28,7 +28,7 @@ const reducer = (state=initialState, action) => {
 				breakTime: 5,
 				sessionTime: 25,
 				seconds: 0,
-				isClockRunnin: !state.isClockRunnin,
+				isClockRunnin: false,
 			}
 		case 'TOGGLE_PLAY':
 			return {
