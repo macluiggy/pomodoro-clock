@@ -7,8 +7,9 @@ export const mapDispatchToProps = dispatch => {
 		incrementBreak: () => dispatch({
 			type: 'INCREMENT_BREAK',
 		}),
-		decrementBreak: () => dispatch({
+		changeBreakTime: (upOrDown) => dispatch({
 			type: 'DECREMENT_BREAK',
+			payload: upOrDown,
 		})
 	}
 }

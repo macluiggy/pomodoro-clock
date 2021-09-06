@@ -7,12 +7,15 @@ const reducer = (state=initialState, action) => {
 		case 'INCREMENT_BREAK':
 			return {
 				...state,
-				breakTime: state.breakTime+1,
+				breakTime:state.breakTime+1
 			}
 		case 'DECREMENT_BREAK':
 			return {
 				...state,
-				breakTime: state.breakTime-1,
+				breakTime:  {
+					up: state.breakTime+1,
+					down: state.breakTime-1,
+				}[action.payload],
 			}
 		default:
 			return state;

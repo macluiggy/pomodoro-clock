@@ -4,10 +4,43 @@ import { mapStateToProps, mapDispatchToProps } from '../mapToProps/'
 import '../sass/main.scss';
 import { Icon } from '@iconify/react';
 
+
+const BreakOrSession = ({
+	decrementId,
+	changeTime,
+	incrementId,
+	incrementFunction,
+	breakOrSessionTime,
+}) => {
+	return (
+			<div>
+				<button
+			      id={decrementId}
+			      onClick={() => changeTime('down')}
+			    >
+					<Icon
+					 icon='akar-icons:arrow-down'
+					/>
+				</button>
+				<time id="break-length">
+					{breakOrSessionTime}
+				</time>
+				<button 
+				  id="break-increment"
+				  onClick={() => changeTime('up')}
+			    >
+					<Icon
+					 icon='akar-icons:arrow-up'
+					/>
+				</button>
+			</div>
+		)
+}
 const Main = ({
 	stateReducer,
 	incrementBreak,
 	decrementBreak,
+	changeBreakTime,
 }) => {
 	//const { value } = state.stateReducer;
 	const { breakTime, sessionTime } = stateReducer;
@@ -19,30 +52,20 @@ const Main = ({
 				<div className='break_container'>
 					<div id='break-label'>
 						<p>Break Length</p>
-						<div>
-							<button
-						      id="break-decrement"
-						      onClick={() => decrementBreak()}
-						    >
-								<Icon
-								 icon='akar-icons:arrow-down'
-								/>
-							</button>
-							<time id="break-length">
-								{breakTime}
-							</time>
-							<button 
-							  id="break-increment"
-							  onClick={() => incrementBreak()}
-						    >
-								<Icon
-								 icon='akar-icons:arrow-up'
-								/>
-							</button>
-						</div>
+						<BreakOrSession
+								decrementId="break-decrement"
+								changeTime={changeBreakTime}
+								incrementId="break-increment"
+								incrementFunction={incrementBreak}
+								breakOrSessionTime={breakTime}
+						/>
 					</div>
 					<div id='session-label'>
 						<p>Session Length</p>
+						<BreakOrSession
+							decrementId="session-decrement"
+
+						/>
 						<div>
 							<Icon
 							 icon='akar-icons:arrow-down'
