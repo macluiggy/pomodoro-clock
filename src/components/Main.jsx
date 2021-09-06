@@ -13,7 +13,7 @@ const Main = ({
 	startCountdown,
 }) => {
 	//const { value } = state.stateReducer;
-	const { breakTime, sessionTime, isClockRunnin, seconds } = stateReducer;
+	const { breakTime, breakTimeInitial, sessionTime, sessionTimeInitial, isClockRunnin, seconds } = stateReducer;
 	//let interval;
 	//console.log(props)
 	let startCount = () => {
@@ -70,7 +70,11 @@ const Main = ({
 						Session
 					</div>
 					<div id='time-left'>
-						{`${sessionTime}:${seconds}`}
+						{`${sessionTime <=9
+							? '0'+sessionTime
+							: sessionTime}:${seconds <= 9
+								? '0' + seconds
+								: seconds}`}
 					</div>
 					<div className='btns'>
 						<button
@@ -110,6 +114,7 @@ const BreakOrSession = ({
 				<button
 			      id={decrementId}
 			      onClick={() => changeTime('down')}
+			      disabled={isClockRunnin}
 			    >
 					<Icon
 					 icon='akar-icons:arrow-down'
@@ -117,12 +122,13 @@ const BreakOrSession = ({
 				</button>
 				<time id={breakOrSessionLength}>
 					{isClockRunnin
-						? [...breakOrSessionTime.toString()].join('')  +'hello'
-						: breakOrSessionTime + 'hola'}
+						? 'pomodoro running'
+						: breakOrSessionTime}
 				</time>
 				<button 
 				  id={incrementId}
 				  onClick={() => changeTime('up')}
+				  disabled={isClockRunnin}
 			    >
 					<Icon
 					 icon='akar-icons:arrow-up'

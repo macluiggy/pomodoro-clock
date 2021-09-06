@@ -1,6 +1,6 @@
 const initialState = {
-	breakTime: '5',
-	sessionTime: '25',
+	breakTime: 5,
+	sessionTime: 25,
 	seconds: 0,
 	isClockRunnin: false,
 }
@@ -10,16 +10,16 @@ const reducer = (state=initialState, action) => {
 			return {
 				...state,
 				breakTime:  {
-					up: parseInt(state.breakTime) +1,
-					down: state.breakTime <= 0 ? state.breakTime : parseInt(state.breakTime)-1,
+					up: state.breakTime+1,
+					down: state.breakTime <= 0 ? state.breakTime : state.breakTime-1,
 				}[action.payload],
 			}
 		case 'CHANGE_SESSION_TIME':
 			return {
 				...state,
 				sessionTime:  {
-					up: parseInt(state.sessionTime) >= 60 ? state.sessionTime : parseInt(state.sessionTime)+1,
-					down: parseInt(state.sessionTime)-1,
+					up: state.sessionTime >= 60 ? state.sessionTime : state.sessionTime+1,
+					down: state.sessionTime-1,
 				}[action.payload],
 			}
 		case 'RESET_POMODORO':
@@ -27,6 +27,8 @@ const reducer = (state=initialState, action) => {
 				...state,
 				breakTime: 5,
 				sessionTime: 25,
+				seconds: 0,
+				isClockRunnin: !state.isClockRunnin,
 			}
 		case 'TOGGLE_PLAY':
 			return {
@@ -37,7 +39,7 @@ const reducer = (state=initialState, action) => {
 			return {
 				...state,
 				sessionTime: state.seconds <= 1 ? state.sessionTime-1 : state.sessionTime,
-				seconds: state.seconds === 0 ? 5 : state.seconds-1
+				seconds: state.seconds === 0 ? 59 : state.seconds-1
 			}
 		default:
 			return state;
