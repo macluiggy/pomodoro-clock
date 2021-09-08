@@ -114,7 +114,6 @@ const BreakOrSession = ({
 	breakOrSessionLength,
 	isClockRunnin,
 }) => {
-	let breakOrSessionTimeFreezed = [...breakOrSessionTime.toString()].join('')
 	return (
 			<div>
 				<button
