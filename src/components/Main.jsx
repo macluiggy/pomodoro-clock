@@ -31,7 +31,7 @@ const Main = ({
 		clearInterval(interval)
 	}*/
 	let test = sessionTime < 0
-	let mins = sessionTime < 0 ? breakTime : sessionTime;
+	let mins = test ? breakTime : sessionTime;
 	if (breakTime <= 0) {
 		resetPomodoro()
 	}
@@ -58,6 +58,7 @@ const Main = ({
 								incrementId="break-increment"	
 								breakOrSessionTime={breakTime}
 								breakOrSessionLength="break-length"
+								test={test}
 						/>
 					</div>
 					<div id='session-label'>
@@ -113,6 +114,7 @@ const BreakOrSession = ({
 	breakOrSessionTime,
 	breakOrSessionLength,
 	isClockRunnin,
+	test,
 }) => {
 	return (
 			<div>
