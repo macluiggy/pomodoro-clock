@@ -11,6 +11,7 @@ const Main = ({
 	resetPomodoro,
 	togglePlay,
 	startCountdown,
+	startCountdown2,
 }) => {
 	//const { value } = state.stateReducer;
 	const { breakTime, breakTimeInitial, sessionTime, sessionTimeInitial, isClockRunnin, seconds, isBreakRunning } = stateReducer;
@@ -29,10 +30,19 @@ const Main = ({
 		console.log('log message')
 		clearInterval(interval)
 	}*/
+	let mins = sessionTime < 0 ? breakTime : sessionTime;
+	
+	console.log(sessionTime < 0)
 	useEffect(() => {
 		if (!isClockRunnin) return
+			
+		
 		let interval = setInterval(() => {
-			startCountdown()
+			if (sessionTime < 0) {
+				startCountdown2()
+			} else {
+				startCountdown()
+			}
 		}, 1000);
 
 		return () => clearInterval(interval)
@@ -70,9 +80,9 @@ const Main = ({
 						Session
 					</div>
 					<div id='time-left'>
-						{`${sessionTime <=9
-							? '0'+sessionTime
-							: sessionTime}:${seconds <= 9
+						{`${mins <=9
+							? '0'+mins
+							: mins}:${seconds <= 9
 								? '0' + seconds
 								: seconds}`}
 					</div>

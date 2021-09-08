@@ -40,7 +40,13 @@ const reducer = (state=initialState, action) => {
 			return {
 				...state,
 				sessionTime: state.seconds <= 1 ? state.sessionTime-1 : state.sessionTime,
-				seconds: state.seconds === 0 ? 59 : state.seconds-1
+				seconds: state.seconds === 0 ? 3 : state.seconds-1
+			}
+		case 'START_COUNTDOWN2':
+			return {
+				...state,
+				breakTime: state.seconds <= 1 ? state.breakTime-1 : state.breakTime,
+				seconds: state.seconds === 0 ? 3 : state.seconds-1
 			}
 		case 'TOGGLE_BREAK':
 			return {
