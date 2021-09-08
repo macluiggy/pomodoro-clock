@@ -1,6 +1,6 @@
 const initialState = {
 	breakTime: 5,
-	sessionTime: 0,
+	sessionTime: 1,
 	seconds: 5,
 	isClockRunnin: false,
 	isBreakRunning: false,
@@ -19,8 +19,8 @@ const reducer = (state=initialState, action) => {
 			return {
 				...state,
 				sessionTime:  {
-					up: state.sessionTime >= 60 ? state.sessionTime : state.sessionTime+1,
-					down: state.sessionTime-1,
+					up: state.sessionTime >= 60 ? 0 : state.sessionTime+1,
+					down: state.sessionTime <=0 ? 60 : state.sessionTime-1,
 				}[action.payload],
 			}
 		case 'RESET_POMODORO':
@@ -40,12 +40,13 @@ const reducer = (state=initialState, action) => {
 			return {
 				...state,
 				sessionTime: state.seconds <= 1 ? state.sessionTime-1 : state.sessionTime,
-				seconds: state.seconds === 0 ? 3 : state.seconds-1
+				seconds: state.seconds === 0 ? 3 : state.seconds-1,
+				breakTime: state.seconds === 1 ? state.breakTime-1 : state.breakTime,
 			}
 		case 'START_COUNTDOWN2':
 			return {
 				...state,
-				breakTime: state.seconds <= 1 ? state.breakTime-1 : state.breakTime,
+				breakTime: state.seconds <= 1 ? state.breakTime-3 : state.breakTime,
 				seconds: state.seconds === 0 ? 3 : state.seconds-1
 			}
 		case 'TOGGLE_BREAK':

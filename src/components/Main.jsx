@@ -30,19 +30,17 @@ const Main = ({
 		console.log('log message')
 		clearInterval(interval)
 	}*/
+	let test = sessionTime < 0
 	let mins = sessionTime < 0 ? breakTime : sessionTime;
-	
+	if (breakTime <= 0) {
+		resetPomodoro()
+	}
 	console.log(sessionTime < 0)
 	useEffect(() => {
 		if (!isClockRunnin) return
 			
-		
 		let interval = setInterval(() => {
-			if (sessionTime < 0) {
-				startCountdown2()
-			} else {
-				startCountdown()
-			}
+			startCountdown()
 		}, 1000);
 
 		return () => clearInterval(interval)
@@ -77,7 +75,7 @@ const Main = ({
 
 				<div className='timer_container'>
 					<div id='timer-label'>
-						Session
+						{test ? 'Break' : 'Session'}
 					</div>
 					<div id='time-left'>
 						{`${mins <=9
