@@ -14,7 +14,7 @@ const Main = ({
 	startCountdown2,
 }) => {
 	//const { value } = state.stateReducer;
-	const { breakTime, breakTimeInitial, sessionTime, sessionTimeInitial, isClockRunnin, seconds, isBreakRunning } = stateReducer;
+	const { breakTime, sessionTime, isClockRunnin, seconds } = stateReducer;
 	//let interval;
 	//console.log(props)
 	/*let startCount = () => {
@@ -44,7 +44,7 @@ const Main = ({
 		}, 1000);
 
 		return () => clearInterval(interval)
-	}, [isClockRunnin])
+	}, [isClockRunnin, startCountdown])
 	return (
 		<div className='container'>
 			<div className='pomodoro_title'></div>
