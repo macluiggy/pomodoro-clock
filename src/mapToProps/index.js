@@ -20,6 +20,9 @@ export const mapDispatchToProps = dispatch => {
 		}),
 		startCountdown: () => dispatch({
 			type: 'START_COUNTDOWN',
+		}),
+		toggleBreak: () => dispatch({
+			type: 'TOGGLE_BREAK',
 		})
 	}
 }

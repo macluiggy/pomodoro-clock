@@ -13,22 +13,22 @@ const Main = ({
 	startCountdown,
 }) => {
 	//const { value } = state.stateReducer;
-	const { breakTime, breakTimeInitial, sessionTime, sessionTimeInitial, isClockRunnin, seconds } = stateReducer;
+	const { breakTime, breakTimeInitial, sessionTime, sessionTimeInitial, isClockRunnin, seconds, isBreakRunning } = stateReducer;
 	//let interval;
 	//console.log(props)
-	let startCount = () => {
+	/*let startCount = () => {
 		togglePlay()
-		/*interval = setInterval(() => {
+		interval = setInterval(() => {
 			if (!isClockRunnin) {
 				startCountdown()
 			}
-		}, 1000)*/
+		}, 1000)
 	}
 	let stopCount = () => {
 		togglePlay()
 		console.log('log message')
-		/*clearInterval(interval)*/
-	}
+		clearInterval(interval)
+	}*/
 	useEffect(() => {
 		if (!isClockRunnin) return
 		let interval = setInterval(() => {
@@ -78,9 +78,7 @@ const Main = ({
 					</div>
 					<div className='btns'>
 						<button
-							onClick={() => {
-								isClockRunnin ? stopCount() : startCount()
-							}}
+							onClick={togglePlay}
 						>
 							<Icon
 							 icon={isClockRunnin ? 'fa-solid:pause' : 'el:play'}

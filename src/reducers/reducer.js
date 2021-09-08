@@ -1,8 +1,9 @@
 const initialState = {
 	breakTime: 5,
-	sessionTime: 25,
-	seconds: 0,
+	sessionTime: 0,
+	seconds: 5,
 	isClockRunnin: false,
+	isBreakRunning: false,
 }
 const reducer = (state=initialState, action) => {
 	switch(action.type) {
@@ -40,6 +41,11 @@ const reducer = (state=initialState, action) => {
 				...state,
 				sessionTime: state.seconds <= 1 ? state.sessionTime-1 : state.sessionTime,
 				seconds: state.seconds === 0 ? 59 : state.seconds-1
+			}
+		case 'TOGGLE_BREAK':
+			return {
+				...state,
+				isBreakRunning: !state.isBreakRunning,
 			}
 		default:
 			return state;
